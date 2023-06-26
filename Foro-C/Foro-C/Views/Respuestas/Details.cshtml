@@ -1,0 +1,36 @@
+﻿@model Foro_C.Models.Respuesta
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Respuesta</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Descripcion)</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Miembro)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Miembro.UserName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pregunta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pregunta.Descripcion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

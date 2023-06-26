@@ -1,0 +1,38 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.sidebar {
+    position: absolute;
+    right: 0;
+    width: 350px;
+    background-color: #f1f1f1;
+}
+
+#sidebar {
+    top: 100px;
+}
+
+#sidebar2 {
+    top: 300px;
+}
+
+#sidebar3 {
+    top: 500px;
+}
+

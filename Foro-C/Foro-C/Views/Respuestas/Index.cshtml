@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Foro_C.Models.Respuesta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Respuestas</h1>
+
+<p>
+    <!--   <a asp-action="Create">Create New</a> -->
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Miembro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pregunta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Descripcion)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Miembro.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pregunta.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a class="reaccion like" asp-action="Create" asp-controller="Reacciones" asp-route-respuestaId="@item.Id" asp-route-meGusta="true"></a>
+                <a class="reaccion dislike" asp-action="Create" asp-controller="Reacciones" asp-route-respuestaId="@item.Id" asp-route-meGusta="false"></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

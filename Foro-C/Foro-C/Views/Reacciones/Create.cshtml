@@ -1,0 +1,46 @@
+﻿@model Foro_C.Models.Reaccion
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Confirme su reaccion</h1>
+
+<h4>Reaccion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="RespuestaId" value="@ViewData["RespuestaId"]" />
+            </div>
+            <div class="form-group">
+                <p>Confirme si su reaccion es: </p>
+                <p>
+                    @if ((bool)ViewData["MeGusta"])
+                    {
+                        <span style="color: green; font-weight: bold;">Me gusta</span>
+                    }
+                    else
+                    {
+                        <span style="color: red; font-weight: bold;">No me gusta</span>
+                    }
+                </p>
+                <input type="hidden" asp-for="MeGusta" value="@ViewData["MeGusta"]" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index" asp-controller="Respuestas">Back to List </a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

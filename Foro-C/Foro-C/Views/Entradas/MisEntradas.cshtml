@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Foro_C.Models.Entrada>
+@{
+    ViewData["Title"] = "MisEntradas";
+}
+
+<h1>Mis Entradas</h1>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descripcion</th>
+            <th>Categoria</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entrada in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details", "Entradas", new { id = entrada.Id })">@entrada.Titulo</a>
+                </td>
+                <td><a href="@Url.Action("Details", "Categoria", new { id = entrada.CategoriaId })">@entrada.Categoria.Nombre</a></td>
+                <td>@entrada.Fecha</td>
+            </tr>
+        }
+    </tbody>
+</table>

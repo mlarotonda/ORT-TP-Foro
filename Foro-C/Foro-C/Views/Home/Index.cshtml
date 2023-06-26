@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var categorias = ViewBag.Categorias as List<Categoria>;
+    var top5Entradas = ViewBag.Top5Entradas as List<Entrada>;
+    var top5EntradasConMasPreguntas = ViewBag.Top5EntradasConMasPreguntas as List<Entrada>;
+    var top3Miembros = ViewBag.Top3Miembros as List<string>;
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div>
+        <p class="text-info">@ViewBag.Mensaje</p>
+    </div>
+
+}
+
+<div class="text-center">
+    <h1>Bienvenidos</h1>
+    <img height="10%" width="10%" src="~/img/logo.png" alt="Forum logo">
+    <!--<br><p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>-->
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="accordion" id="accordionExample">
+            @foreach (var categoria in categorias)
+            {
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@(categoria.Id)" aria-expanded="true" aria-controls="collapse@(categoria.Id)">@categoria.Nombre</button>
+                    </h2>
+                    <div id="collapse@(categoria.Id)" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul class="list-group">
+                                @foreach (var entrada in categoria.Entradas)
+                                {
+                                    if (signInManager.IsSignedIn(User))
+                                    {
+                                        <a class="list-group-item" asp-controller="Entradas" asp-action="Details" asp-route-id="@entrada.Id">@Html.DisplayFor(modelItem => entrada.Titulo)</a>
+                                    }
+                                    else
+                                    {
+                                        if (!entrada.Privada)
+                                        {
+                                            <a class="list-group-item" asp-controller="Entradas" asp-action="Details" asp-route-id="@entrada.Id">@Html.DisplayFor(modelItem => entrada.Titulo)</a>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="sidebar" id="sidebar">
+    <h5>Top 5 Entradas Más Recientes</h5>
+    <ul>
+        @foreach (var entrada in top5Entradas)
+        {
+            <li><a class="text-dark" asp-controller="Entradas" asp-action="Details" asp-route-id="@entrada.Id">@Html.DisplayFor(modelItem => entrada.Titulo)</a></li>
+        }
+    </ul>
+</div>
+
+<div class="sidebar" id="sidebar2">
+    <h5>Top 5 Entradas con más preguntas</h5>
+    <ul>
+        @foreach (var entrada in ViewBag.Top5EntradasConMasPreguntas)
+        {
+            int cantidadPreguntas = entrada.Preguntas != null ? entrada.Preguntas.Count : 0;
+            <li><a class="text-dark" asp-controller="Entradas" asp-action="Details" asp-route-id="@entrada.Id">@entrada.Titulo</a> - Preguntas: @cantidadPreguntas</li>
+        }
+    </ul>
+</div>
+
+<div class="sidebar" id="sidebar3">
+    <h5>Top 3 Miembros </h5>
+    <h9>con más entradas en el último mes</h9>
+    <ul>
+        @if (ViewBag.Top3Miembros != null && ViewBag.Top3Miembros.Count > 0)
+        {
+            @foreach (var miembro in ViewBag.Top3Miembros)
+            {
+                <li>@miembro.UserName - @miembro.CantidadEntradas entradas</li>
+            }
+        }
+        else
+        {
+            <li>No hay miembros con entradas en el último mes</li>
+        }
+    </ul>
+</div>
+

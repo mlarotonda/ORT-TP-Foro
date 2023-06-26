@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Foro_C.Models.Categoria">
+    <Position X="15.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\Categoria.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Entradas" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Foro_C.Models.Entrada">
+    <Position X="11.75" Y="0.75" Width="2" />
+    <AssociationLine Name="Preguntas" Type="Foro_C.Models.Pregunta" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.024" Y="2.815" />
+        <Point X="13.024" Y="3.875" />
+        <Point X="14.062" Y="3.875" />
+        <Point X="14.062" Y="4.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.343" Y="0.443" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="MiembrosHabilitados" Type="Foro_C.Models.EntradaMiembro">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.132" Y="-0.249" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Miembro" Type="Foro_C.Models.Miembro" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.75" Y="2.625" />
+        <Point X="11.375" Y="2.625" />
+        <Point X="11.375" Y="3.687" />
+        <Point X="10" Y="3.687" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.252" Y="0.118" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgCEgAAAAAAAAAQAAAAAAAAAIAAAAAFA=</HashCode>
+      <FileName>Models\Entrada.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Categoria" />
+      <Property Name="Miembro" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Preguntas" />
+      <Property Name="MiembrosHabilitados" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Foro_C.Models.Miembro">
+    <Position X="7.25" Y="3.5" Width="2.75" />
+    <AssociationLine Name="Preguntas" Type="Foro_C.Models.Pregunta" FixedFromPoint="true">
+      <Path>
+        <Point X="10" Y="4.326" />
+        <Point X="12.304" Y="4.326" Type="JumpStart" />
+        <Point X="12.47" Y="4.326" Type="JumpEnd" />
+        <Point X="13.75" Y="4.326" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Respuestas" Type="Foro_C.Models.Respuesta" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.688" Y="3.5" />
+        <Point X="7.688" Y="0.291" />
+        <Point X="18.312" Y="0.291" />
+        <Point X="18.312" Y="4.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.102" Y="0.591" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAACAAAAAAAAAAAAAAAAAAAAAABgAAEAA=</HashCode>
+      <FileName>Models\Miembro.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Preguntas" />
+      <Property Name="Respuestas" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Foro_C.Models.Persona">
+    <Position X="5.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAEEAAAAgABAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Persona.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Foro_C.Models.Pregunta">
+    <Position X="13.75" Y="4.25" Width="1.5" />
+    <AssociationLine Name="Miembro" Type="Foro_C.Models.Miembro" FixedToPoint="true">
+      <Path>
+        <Point X="13.75" Y="4.767" />
+        <Point X="12.47" Y="4.767" Type="JumpStart" />
+        <Point X="12.304" Y="4.767" Type="JumpEnd" />
+        <Point X="10" Y="4.767" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.177" Y="-0.257" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Entrada" Type="Foro_C.Models.Entrada">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.062" Y="0.078" Height="0.182" Width="0.874" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Respuestas" Type="Foro_C.Models.Respuesta">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.03" Y="-0.248" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACCAAAAAAAAAEAAAAAAAABAQAEAAAgAAAIAAAAEAA=</HashCode>
+      <FileName>Models\Pregunta.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Miembro" />
+      <Property Name="Entrada" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Respuestas" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Foro_C.Models.Reaccion">
+    <Position X="11.75" Y="6" Width="1.5" />
+    <AssociationLine Name="Miembro" Type="Foro_C.Models.Miembro">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.858" Y="0.673" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Respuesta" Type="Foro_C.Models.Respuesta">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.068" Y="0.902" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAABIAAAAAAo=</HashCode>
+      <FileName>Models\Reaccion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Miembro" />
+      <Property Name="Respuesta" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Foro_C.Models.Respuesta">
+    <Position X="17.25" Y="4.25" Width="1.5" />
+    <AssociationLine Name="Reacciones" Type="Foro_C.Models.Reaccion" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.516" Y="6.123" />
+        <Point X="17.516" Y="6.75" />
+        <Point X="13.25" Y="6.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Pregunta" Type="Foro_C.Models.Pregunta">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.108" Y="0.104" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAgAAAACEAAAAAAACBAQAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Models\Respuesta.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Miembro" />
+      <Property Name="Pregunta" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Reacciones" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Foro_C.Models.EntradaMiembro">
+    <Position X="8.5" Y="1" Width="1.5" />
+    <AssociationLine Name="Miembro" Type="Foro_C.Models.Miembro" FixedFromPoint="true">
+      <Path>
+        <Point X="8.812" Y="2.296" />
+        <Point X="8.812" Y="3.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAQAEAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Models\EntradaMiembro.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Entrada" />
+      <Property Name="Miembro" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

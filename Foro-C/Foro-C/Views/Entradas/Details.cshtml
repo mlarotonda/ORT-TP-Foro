@@ -1,0 +1,96 @@
+﻿@model Foro_C.Models.Entrada
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h3>Entrada: @Html.DisplayFor(model => model.Titulo)</h3>
+    <hr />
+
+    <table class="table" style="width: 50%;">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                <th>@Html.DisplayNameFor(model => model.Privada)</th>
+                <th>@Html.DisplayNameFor(model => model.Categoria)</th>
+                <th>Creador</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Fecha)</td>
+                <td>@Html.DisplayFor(model => model.Privada)</td>
+                <td>@Html.DisplayFor(model => model.Categoria.Nombre)</td>
+                <td>@Html.DisplayFor(model => model.Miembro.UserName)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    @*<dl class="row">
+    <dt class="col-sm-2">
+    @Html.DisplayNameFor(model => model.Fecha)
+    </dt>
+    <dd class="col-sm-10">
+    @Html.DisplayFor(model => model.Fecha)
+    </dd>
+    <dt class="col-sm-2">
+    @Html.DisplayNameFor(model => model.Privada)
+    </dt>
+    <dd class="col-sm-10">
+    @Html.DisplayFor(model => model.Privada)
+    </dd>
+    <dt class="col-sm-2">
+    @Html.DisplayNameFor(model => model.Categoria)
+    </dt>
+    <dd class="col-sm-10">
+    @Html.DisplayFor(model => model.Categoria.Nombre)
+    </dd>
+    <dt class="col-sm-2">
+    @Html.DisplayNameFor(model => model.Miembro)
+    </dt>
+    <dd class="col-sm-10">
+    @Html.DisplayFor(model => model.Miembro.UserName)
+    </dd>
+    </dl>*@
+</div>
+
+<br />
+<h3>Preguntas</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-1">Autor</th>
+            <th>Descripción</th>
+            <th>Respuestas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pregunta in Model.Preguntas)
+        {
+            <tr>
+                <td>@pregunta.Miembro.UserName</td>
+
+                @if (pregunta.Activa)
+                {
+                    <td><a asp-controller="Preguntas" asp-route-id="@pregunta.Id">@pregunta.Descripcion</a></td>
+                    <td>@Html.DisplayFor(modelItem => pregunta.Respuestas.Count)</td>
+                }
+                else
+                {
+                    <td><a>@pregunta.Descripcion</a></td>
+                    <td>@Html.DisplayFor(modelItem => pregunta.Respuestas.Count)</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a class="btn btn-primary" asp-controller="Preguntas" asp-action="Create" asp-route-entradaId="@Model.Id">Preguntar</a>
+    <br />
+    <br />
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editar</a>
+    <a asp-controller="Categorias" asp-action="Details" asp-route-id="@Model.CategoriaId" class="btn btn-secondary">Volver al listado</a>
+</div>

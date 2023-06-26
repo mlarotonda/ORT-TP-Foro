@@ -1,0 +1,117 @@
+﻿@model Foro_C.Models.Pregunta
+
+@{
+    ViewData["Title"] = "Details";
+    var respuestaConMasMG = ViewBag.RespuestaConMasMG as Respuesta;
+    var respuestaConMasNoMG = ViewBag.RespuestaConMasNoMG as Respuesta;
+    var usuarioLogueado = ViewBag.UsuarioLogueado as Persona;
+}
+
+<div>
+    <h3>Pregunta: @Html.DisplayFor(model => model.Descripcion)</h3>
+    <hr />
+
+    <table class="table" style="width: 50%;">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Fecha)</thclass>
+                <th>@Html.DisplayNameFor(model => model.Activa)</th>
+                <th>Creador</th>
+                <th>@Html.DisplayNameFor(model => model.Entrada)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Fecha)</td>
+                <td>@Html.DisplayFor(model => model.Activa)</td>
+                <td>@Html.DisplayFor(model => model.Miembro.UserName)</td>
+                <td>@Html.DisplayFor(model => model.Entrada.Titulo)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    @*<dl class="row">
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Fecha)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Fecha)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Activa)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Activa)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Miembro)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Miembro.UserName)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Entrada)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Entrada.Titulo)
+    </dd>
+    </dl>*@
+</div>
+
+<br />
+<h3>Respuestas</h3>
+
+<table class="table">
+    <tbody>
+        <tr>
+            @foreach (var item in Model.Respuestas)
+            {
+                string fontColor = item == respuestaConMasMG ? "green" : item == respuestaConMasNoMG ? "red" : "black";
+                bool tieneMeGusta = false, tieneNoMeGusta = false;
+                if (usuarioLogueado != null)
+                {
+                    tieneMeGusta = item.Reacciones.Any(r => r.MiembroId == usuarioLogueado.Id && r.MeGusta == true);
+                    tieneNoMeGusta = item.Reacciones.Any(r => r.MiembroId == usuarioLogueado.Id && r.MeGusta == false);
+                }
+                
+            <tr>
+                <td class="col-1 with-separator">
+                        @Html.DisplayFor(modelItem => item.Miembro.UserName)
+                </td class="col">
+                <td style="color: @fontColor">
+                    <div>@Html.DisplayFor(modelItem => item.Descripcion)</div>
+                    <div>
+                            @if(!tieneMeGusta)
+                            {
+                                <a asp-action="CrearReaccion" asp-controller="Reacciones" asp-route-respuestaId="@item.Id" asp-route-meGusta="true" asp-route-preguntaId="@Model.Id"><img class="reaccion like" class="logo" src="~/img/like-unselect.png" alt="like"></a>    
+                            } else
+                            {
+                                <a asp-action="EliminarReaccion" asp-controller="Reacciones" asp-route-respuestaId="@item.Id" asp-route-miembroId="@usuarioLogueado.Id" asp-route-preguntaId="@Model.Id"><img class="reaccion like" class="logo" src="~/img/like.png" alt="like"></a>    
+                            }
+                            <span style="font-size: 10px; color: dimgray;">@item.Reacciones.Count(re => re.MeGusta == true)</span>
+                            @if(!tieneNoMeGusta)
+                            {
+                                <a asp-action="CrearReaccion" asp-controller="Reacciones" asp-route-respuestaId="@item.Id" asp-route-meGusta="false" asp-route-preguntaId="@Model.Id"><img class="reaccion dislike" class="logo" src="~/img/dislike-unselect.png" alt="not like"></a>
+                            } else
+                            {
+                                <a asp-action="EliminarReaccion" asp-controller="Reacciones" asp-route-respuestaId="@item.Id" asp-route-miembroId="@usuarioLogueado.Id" asp-route-preguntaId="@Model.Id"><img class="reaccion dislike" class="logo" src="~/img/dislike.png" alt="not like"></a>
+                            }
+                            <span style="font-size: 10px; color: dimgray;">@item.Reacciones.Count(re => re.MeGusta == false)</span>
+                        
+                        <span class="fecha">&nbsp &nbsp @Html.DisplayFor(modelItem => item.Fecha)</span>
+                    </div> 
+                </td>
+            </tr>
+            }
+
+    </tbody>
+</table>
+
+<div>
+    <br />
+    <a class="btn btn-primary" asp-controller="Respuestas" asp-action="Create" asp-route-preguntaId="@Model.Id">Responder</a>
+    <br />
+    <br />
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Editar</a>
+    <a asp-controller="Entradas" asp-action="Details" asp-route-id="@Model.EntradaId" class="btn btn-secondary">Volver al listado</a>
+</div>

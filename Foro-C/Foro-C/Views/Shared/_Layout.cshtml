@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Foro_C</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Foro_C.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                                <img class="logo" src="~/img/logo.png" alt="Logo">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+
+                        <li class="separator text-dark">|</li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categorias" asp-action="Index">Categorias</a>
+                        </li>
+
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="separator text-dark">|</li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Entradas" asp-action="Index">Entradas</a>
+                                </li>
+                                <li class="separator text-dark">|</li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Preguntas" asp-action="Index">Preguntas</a>
+                                </li>
+                                <li class="separator text-dark">|</li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Respuestas" asp-action="Index">Respuestas</a>
+                                </li>
+                                <li class="separator text-dark">|</li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reacciones" asp-action="Index">Reacciones</a>
+                                </li>
+                                <li class="separator text-dark">|</li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Miembros" asp-action="Index">Miembros</a>
+                                </li>
+                                <li class="separator text-dark">|</li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ListarRoles">Listar Roles</a>
+                                </li>
+                            }
+                            <li class="btn-group dropstart right nav-item">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img class="logo-user" src="~/img/user.png" alt="User">
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Index">Mi perfil</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Entradas" asp-action="MisEntradas">Mis Entradas</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="CerrarSesion">Cerrar sesión</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        }
+                        else
+                        {
+
+                            <li class="nav-item right">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Registrar">Registrarse</a>
+                            </li>
+                            <li class="right separator text-dark">|</li>
+                            <li class="nav-item right">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="iniciarSesion">Iniciar sesión</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="footer-container">
+            &copy; 2023 - Foro_C - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> |
+            <a class="btn button btn-sm btn-info" asp-action="Seed" asp-controller="PreCarga"> Pre-Carga DB </a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @Html.Raw(TempData["precarga-msg"])
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

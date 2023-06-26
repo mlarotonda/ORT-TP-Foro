@@ -1,0 +1,120 @@
+﻿.logo {
+    height: 35px;
+    width: 40px;
+    margin-right: 15px;
+    margin-left: 10px;   
+}
+
+.logo-user {
+    height: 25px;
+    width: 25px;
+}
+
+nav {
+    background-color: gainsboro;
+    height: 45px;
+}
+
+ul.navbar-nav {
+    margin-top: 3px;
+    display: block;
+    align-items: center;
+}
+
+li.nav-item {
+    font-weight: 600;
+    float: left;
+}
+
+li.nav-item:hover:not(:first-child) {
+    background-color: #cccecf;
+}
+
+li.separator {
+    padding: 0.5rem;
+    float: left;
+    font-weight: 600;
+}
+
+li.right {
+    float: right;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+footer {
+    min-height: 30px;
+    background-color: gainsboro;
+    text-align: right;
+}
+
+.footer-container {
+    margin-right: 30px;
+}
+
+.button {
+    background-color: steelblue;
+    border: none;
+    font-size: 13px;
+    font-weight: bold;
+    color: #FFFFFF;
+    width: 100px;
+    padding: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #1a478f;
+    color: #FFFFFF;
+}
+
+.privacy {
+    opacity: 0.05;
+    position: fixed;
+    width: 90%;
+    bottom: 30px;
+    text-align: center;
+    z-index: -1;
+}
+
+.like {
+    margin-bottom: 4px;
+}
+
+.dislike {
+    margin-top: 4px;
+}
+
+.reaccion {
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin-left: 5px;
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+}
+
+.with-separator {
+    border-right: 1px solid #ccc;
+    padding-right: 10px;
+}
+
+span.fecha {
+    color: gray;
+    font-size: 10px;
+}
+
+a.list-group-item:hover {
+    background-color: #f2f8fc;
+}
+
+button.collapsed {
+    background-color: #d8e4eb;
+}
